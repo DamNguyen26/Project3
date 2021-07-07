@@ -1,0 +1,107 @@
+@model IEnumerable<AirlinesReservationSystem.Models.Aircraft>
+
+@{
+    ViewBag.Title = "Aircraft";
+}
+<link href="~/Content/datatables.min.css" rel="stylesheet" />
+<script src="~/Scripts/datatables.min.js"></script>
+<h2>Aircraft List <a href="/arsadmin/aircraftadd" class="btn btn-success">Add new aircraft</a></h2>
+
+<div class="col-md-12">
+    <table class="table table-bordered table-hover table-sm" id="aircraftList">
+        <tr class="table-ars">
+            <th>
+                Aircraft ID
+            </th>
+            <th>
+                Aircraft Name
+            </th>
+            <th>
+                First Class Seats
+            </th>
+            <th>
+                Bussiness Seats
+            </th>
+            <th>
+                Economy Seats
+            </th>
+            <th>
+                Range
+            </th>
+            <th>
+                Service Fee
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AircraftID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AircraftName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstClassSeats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BussinessSeats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EconomySeats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Range)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceFee)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "AircraftEdit", new { id = item.AircraftID }, new { @class = "btn btn-ars-dark" }) |
+                    <input type="button" class="btn btn-danger" value="Delete" data-toggle="modal" data-target="#modal" onclick="confirmDeleteAircraft('@item.AircraftID')" />
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div class="modal fade" id="modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header bg-ars">
+                <h4 class="modal-title" id="modalTitle">Delete confirm</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" id="modalBody">
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" id="btnConfirm">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#countryList').DataTable();
+    });
+
+    function confirmDeleteAircraft(id) {
+        $("#modalBody").html("<h3 class='text-danger'>Are you sure to delete aircraft \"" + id + "\"?</h3>");
+        $("#btnConfirm").on("click", function () { deleteaircraft(id); });
+    }
+    function deleteaircraft(id) {
+        $.post("/arsadmin/aircraftdelete?id=" + id, function (result) {
+            $('#modal').modal('hide');
+            location.reload();
+        });
+    }
+</script>

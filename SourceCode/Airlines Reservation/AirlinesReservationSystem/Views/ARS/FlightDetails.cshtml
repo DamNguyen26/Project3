@@ -1,0 +1,39 @@
+@model AirlinesReservationSystem.Models.ars.FlightResult
+
+@{
+    ViewBag.Title = "FlightDetails";
+    bool firstClassSeats = false, BusinessSeats = false;
+    if (Model.FlightVM.AvailSeatsF >= 0) { firstClassSeats = true; }
+    if (Model.FlightVM.AvailSeatsB >= 0) { BusinessSeats = true; }
+    var searchParams = (AirlinesReservationSystem.Models.ars.FlightSearch)Session["searchParams"];
+    int totalPassenger = int.Parse(Session["totalPassenger"].ToString());
+    bool roundTrip = bool.Parse(searchParams.IsRoundTrip.ToString());
+}
+
+<h2>FlightDetails</h2>
+
+<div>
+    @Model.FlightVM.FNo <br />
+    @Model.FlightVM.Route.Airline.AirlineName
+</div>
+
+@if (!roundTrip)
+{
+    Session["fid1"] = Model.FlightVM.FNo;
+    @Html.ActionLink("Continue to Payment", "Payment", null, new { @class = "btn btn-ars-light btn-ars-list" })
+    @*@Html.ActionLink("Continue to Payment", "Payment", new { FNo = Model.FlightVM.FNo, PeopleNum = totalPassenger }, new { @class = "btn btn-ars-light btn-ars-list" })*@
+}
+else
+{
+    if (Session["fid1"] == null)
+    {
+        Session["fid1"] = Model.FlightVM.FNo;
+        @Html.ActionLink("Select", "FlightListReturn", new { fid = Model.FlightVM.FNo, rid = Model.RouteVM.RNo }, new { @class = "btn btn-ars-light mb-md-1" })
+    }
+    else
+    {
+        Session["fid2"] = Model.FlightVM.FNo;
+        @Html.ActionLink("Continue to Booking", "Payment", null, new { @class = "btn btn-ars-light btn-ars-list" })
+        @*@Html.ActionLink("Continue to Booking", "Payment", new { FNo = Model.FlightVM.FNo, ReFNo = Model.FlightVM.FNo, PeopleNum = totalPassenger }, new { @class = "btn btn-ars-light btn-ars-list" })*@
+    }
+}

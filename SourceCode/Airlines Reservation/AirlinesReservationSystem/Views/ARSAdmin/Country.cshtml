@@ -1,0 +1,87 @@
+@model IEnumerable<AirlinesReservationSystem.Models.Country>
+
+@{
+    ViewBag.Title = "Country";
+}
+<link href="~/Content/datatables.min.css" rel="stylesheet" />
+<script src="~/Scripts/datatables.min.js"></script>
+<h2>Country List <a href="/arsadmin/countryadd" class="btn btn-success">Add new country</a></h2>
+
+<div class="col-md-12">
+    <table class="table table-bordered table-hover table-sm" id="countryList">
+        <thead>
+            <tr class="table-ars">
+                <th>
+                    Country ID
+                </th>
+                <th>
+                    Country Name
+                </th>
+                <th>
+                    Flag
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CountryID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CountryName)
+                    </td>
+                    <td>
+                        <img src="../@item.CountryFlag" alt="flag" width="200px" height="100px" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "CountryEdit", new { id = item.CountryID }, new { @class = "btn btn-ars-dark" }) |
+                        <input type="button" class="btn btn-danger" value="Delete" data-toggle="modal" data-target="#modal" onclick="confirmDeleteCountry('@item.CountryID')" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+</div>
+
+
+<div class="modal fade" id="modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header bg-ars">
+                <h4 class="modal-title" id="modalTitle">Delete confirm</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" id="modalBody">
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" id="btnConfirm">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#countryList').DataTable();
+    });
+
+    function confirmDeleteCountry(id) {
+        $("#modalBody").html("<h3 class='text-danger'>Are you sure to delete country \"" + id + "\"?</h3>");
+        $("#btnConfirm").on("click", function () { deletecountry(id); });
+    }
+    function deletecountry(id) {
+        $.post("/arsadmin/countrydelete?id=" + id, function (result) {
+            $('#modal').modal('hide');
+            location.reload();
+        });
+    }
+</script>

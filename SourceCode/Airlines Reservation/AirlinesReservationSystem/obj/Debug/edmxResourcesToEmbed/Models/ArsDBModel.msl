@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AirlineDBModelStoreContainer" CdmEntityContainer="AirlineDBEntities">
+    <EntitySetMapping Name="Aircraft">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.Aircraft)">
+        <MappingFragment StoreEntitySet="Aircraft">
+          <ScalarProperty Name="AircraftID" ColumnName="AircraftID" />
+          <ScalarProperty Name="AircraftName" ColumnName="AircraftName" />
+          <ScalarProperty Name="FirstClassSeats" ColumnName="FirstClassSeats" />
+          <ScalarProperty Name="BussinessSeats" ColumnName="BussinessSeats" />
+          <ScalarProperty Name="EconomySeats" ColumnName="EconomySeats" />
+          <ScalarProperty Name="Range" ColumnName="Range" />
+          <ScalarProperty Name="ServiceFee" ColumnName="ServiceFee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Airline">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.Airline)">
+        <MappingFragment StoreEntitySet="Airline">
+          <ScalarProperty Name="AirlineID" ColumnName="AirlineID" />
+          <ScalarProperty Name="AirlineCountry" ColumnName="AirlineCountry" />
+          <ScalarProperty Name="AirlineName" ColumnName="AirlineName" />
+          <ScalarProperty Name="AirlineIcon" ColumnName="AirlineIcon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Airport">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.Airport)">
+        <MappingFragment StoreEntitySet="Airport">
+          <ScalarProperty Name="AirportID" ColumnName="AirportID" />
+          <ScalarProperty Name="AirportName" ColumnName="AirportName" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="GMT" ColumnName="GMT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Country">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.Country)">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="CountryFlag" ColumnName="CountryFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CreditCard">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.CreditCard)">
+        <MappingFragment StoreEntitySet="CreditCard">
+          <ScalarProperty Name="CCNo" ColumnName="CCNo" />
+          <ScalarProperty Name="CVV" ColumnName="CVV" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.Employee)">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="DoB" ColumnName="DoB" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Flight">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.Flight)">
+        <MappingFragment StoreEntitySet="Flight">
+          <ScalarProperty Name="FNo" ColumnName="FNo" />
+          <ScalarProperty Name="RNo" ColumnName="RNo" />
+          <ScalarProperty Name="AvailSeatsF" ColumnName="AvailSeatsF" />
+          <ScalarProperty Name="AvailSeatsB" ColumnName="AvailSeatsB" />
+          <ScalarProperty Name="AvailSeatsE" ColumnName="AvailSeatsE" />
+          <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
+          <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+          <ScalarProperty Name="FlightTime" ColumnName="FlightTime" />
+          <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlightDistance">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.FlightDistance)">
+        <MappingFragment StoreEntitySet="FlightDistance">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AirportID1" ColumnName="AirportID1" />
+          <ScalarProperty Name="AirportID2" ColumnName="AirportID2" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.Order)">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Route">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.Route)">
+        <MappingFragment StoreEntitySet="Route">
+          <ScalarProperty Name="RNo" ColumnName="RNo" />
+          <ScalarProperty Name="RAirline" ColumnName="RAirline" />
+          <ScalarProperty Name="RAircraft" ColumnName="RAircraft" />
+          <ScalarProperty Name="Departure" ColumnName="Departure" />
+          <ScalarProperty Name="Destination" ColumnName="Destination" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Service">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.Service)">
+        <MappingFragment StoreEntitySet="Service">
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+          <ScalarProperty Name="ServiceDetails" ColumnName="ServiceDetails" />
+          <ScalarProperty Name="ServiceFee" ColumnName="ServiceFee" />
+          <ScalarProperty Name="IsServing" ColumnName="IsServing" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ticket">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.Ticket)">
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="FNo" ColumnName="FNo" />
+          <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="IsReturn" ColumnName="IsReturn" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketService">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.TicketService)">
+        <MappingFragment StoreEntitySet="TicketService">
+          <ScalarProperty Name="TSID" ColumnName="TSID" />
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="IsTypeOf(AirlineDBModel.User)">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="CCNo" ColumnName="CCNo" />
+          <ScalarProperty Name="PassportNo_" ColumnName="PassportNo_" />
+          <ScalarProperty Name="Skymiles" ColumnName="Skymiles" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

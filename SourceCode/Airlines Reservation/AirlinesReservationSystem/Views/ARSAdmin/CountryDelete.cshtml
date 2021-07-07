@@ -1,0 +1,43 @@
+@model AirlinesReservationSystem.Models.Country
+
+@{
+    ViewBag.Title = "CountryDelete";
+}
+<h2>Country - Country Delete <a href="/arsadmin/country" class="btn btn-warning">Back to list</a></h2>
+<div class="col-md-12">&nbsp;</div>
+
+
+
+<div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*<h4>Are you sure you want to delete this?</h4>*@
+    <div class="form-group form-inline">
+        <b><label class="control-label col-md-4" style="text-align:left,">Country ID </label></b>
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.CountryID)
+        </div>
+    </div>
+
+    <div class="form-group form-inline">
+        <b><label class="control-label col-md-4" style="text-align:left">Country Name </label></b>
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.CountryName)
+        </div>
+    </div>
+
+    <div class="form-group form-inline">
+        <b><label class="control-label col-md-4" style="text-align:left">Country Flag </label></b>
+        <div class="col-md-8">
+            <img src="@Url.Content(Model.CountryFlag)" alt="flag" width="200px" height="100px" />
+        </div>
+    </div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+     <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-lg btn-info" /> |
+            </div>
+        }
+    </div>

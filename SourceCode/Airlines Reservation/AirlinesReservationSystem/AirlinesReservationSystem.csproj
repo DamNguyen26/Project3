@@ -1,0 +1,448 @@
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1AE78C64-957C-4475-B324-01BABE8E3B4E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AirlinesReservationSystem</RootNamespace>
+    <AssemblyName>AirlinesReservationSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44379</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\arsAdmin\flightAdd.css" />
+    <Content Include="Content\ars\FlightList.css" />
+    <Content Include="Content\ars\index.css" />
+    <Content Include="Content\ars\layoutadmin.css" />
+    <Content Include="Content\ars\layout.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datatables.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\select2.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\typeahead.css" />
+    <Content Include="Global.asax" />
+    <Content Include="img\ars\Logo.png" />
+    <Content Include="Models\ArsDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ArsDBModel.Context.cs</LastGenOutput>
+      <DependentUpon>ArsDBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ArsDBModel.edmx.sql" />
+    <Content Include="Models\ArsDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ArsDBModel.edmx</DependentUpon>
+      <LastGenOutput>ArsDBModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ArsDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ArsDBModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\ars\index.js" />
+    <Content Include="Scripts\ars\indexAiports.js" />
+    <Content Include="Scripts\ars\layout.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\datatables.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <EntityDeploy Include="Models\ArsDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ArsDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ArsDBModel.edmx.diagram">
+      <DependentUpon>ArsDBModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\select2.full.min.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AircraftController.cs" />
+    <Compile Include="Controllers\ARSAdminController.cs" />
+    <Compile Include="Controllers\ARSController.cs" />
+    <Compile Include="Controllers\ARSFlightList.cs" />
+    <Compile Include="Controllers\ARSReSchedule.cs" />
+    <Compile Include="Controllers\BankController.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FlightManager.cs" />
+    <Compile Include="Controllers\RouteManager.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Aircraft.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Airline.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Airport.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\arsadmin\AircraftDAO.cs" />
+    <Compile Include="Models\arsadmin\AirlineDAO.cs" />
+    <Compile Include="Models\arsadmin\AirlinesController.cs" />
+    <Compile Include="Models\arsadmin\AirportDAO.cs" />
+    <Compile Include="Models\arsadmin\CountryDAO.cs" />
+    <Compile Include="Models\arsadmin\Dropdowns.cs" />
+    <Compile Include="Models\arsadmin\ErrorModel.cs" />
+    <Compile Include="Models\arsadmin\FlightDAO.cs" />
+    <Compile Include="Models\arsadmin\FlightDistanceDAO.cs" />
+    <Compile Include="Models\arsadmin\InsertDAO.cs" />
+    <Compile Include="Models\arsadmin\OrderDAO.cs" />
+    <Compile Include="Models\arsadmin\TicketDAO.cs" />
+    <Compile Include="Models\ArsDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArsDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArsDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArsDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArsDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ars\AirlineDAO.cs" />
+    <Compile Include="Models\ars\AirportSearch.cs" />
+    <Compile Include="Models\ars\Dropdowns.cs" />
+    <Compile Include="Models\ars\FlightCalendarDAO.cs" />
+    <Compile Include="Models\ars\FlightResult.cs" />
+    <Compile Include="Models\ars\FlightSearch.cs" />
+    <Compile Include="Models\ars\FlightSearchDetails.cs" />
+    <Compile Include="Models\ars\Payment.cs" />
+    <Compile Include="Models\ars\PaymentDAO.cs" />
+    <Compile Include="Models\ars\ReScheduleDAO.cs" />
+    <Compile Include="Models\ars\StatisticDAO.cs" />
+    <Compile Include="Models\ars\TicketServiceDAO.cs" />
+    <Compile Include="Models\ars\UsersDAO.cs" />
+    <Compile Include="Models\bank\BankDAO.cs" />
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CreditCard.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\arsadmin\EmployeeDAO.cs" />
+    <Compile Include="Models\Flight.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FlightDistance.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ars\FlightSearchDAO.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Route.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\arsadmin\RouteDAO.cs" />
+    <Compile Include="Models\Service.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\arsadmin\ServiceDAO.cs" />
+    <Compile Include="Models\Ticket.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TicketService.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>ArsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\ARS\Index.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\ARS\Login.cshtml" />
+    <Content Include="Views\ARSAdmin\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\ARSAdmin\Index.cshtml" />
+    <Content Include="Views\ARSAdmin\Login.cshtml" />
+    <Content Include="Views\ARSAdmin\Employee.cshtml" />
+    <Content Include="Views\ARS\TypeAheadDemo.cshtml" />
+    <Content Include="Views\ARSAdmin\EmployeeAdd.cshtml" />
+    <Content Include="Views\ARSAdmin\EmployeeList.cshtml" />
+    <Content Include="Views\ARS\FlightList.cshtml" />
+    <Content Include="Views\ARSAdmin\EmployeeEdit.cshtml" />
+    <Content Include="Views\ARS\FlightDetails.cshtml" />
+    <Content Include="Views\ARSAdmin\EmployeeAddTemplate.cshtml" />
+    <Content Include="Views\ARSAdmin\Service.cshtml" />
+    <Content Include="Views\ARSAdmin\ServiceAdd.cshtml" />
+    <Content Include="Views\ARS\Register.cshtml" />
+    <Content Include="Views\ARS\ProfileUser.cshtml" />
+    <Content Include="Views\ARSAdmin\Customer.cshtml" />
+    <Content Include="Views\ARSAdmin\CustomerList.cshtml" />
+    <Content Include="Views\ARS\EditUser.cshtml" />
+    <Content Include="Views\ARSAdmin\CustomerEdit.cshtml" />
+    <Content Include="Views\ARSAdmin\ServiceEdit.cshtml" />
+    <Content Include="Views\ARSAdmin\Route.cshtml" />
+    <Content Include="Views\ARSAdmin\RouteAdd.cshtml" />
+    <Content Include="Views\ARSAdmin\RouteEdit.cshtml" />
+    <Content Include="Views\ARSAdmin\Flight.cshtml" />
+    <Content Include="Views\ARSAdmin\FlightAdd.cshtml" />
+    <Content Include="Views\ARS\FlightListReturn.cshtml" />
+    <Content Include="Views\ARSAdmin\Order.cshtml" />
+    <Content Include="Views\ARSAdmin\OrderDetails.cshtml" />
+    <Content Include="Views\ARSAdmin\TicketEdit.cshtml" />
+    <Content Include="Views\ARSAdmin\FlightEdit.cshtml" />
+    <Content Include="Views\ARS\Payment.cshtml" />
+    <Content Include="Views\ARS\JqueryUIDemo.cshtml" />
+    <Content Include="Views\ARS\PaymentResult.cshtml" />
+    <Content Include="Views\ARS\Test.cshtml" />
+    <Content Include="Views\ARS\FlightListWithStops.cshtml" />
+    <Content Include="Views\ARS\FlightListWithStops2.cshtml" />
+    <Content Include="Views\ARS\PaymentSearch.cshtml" />
+    <Content Include="Views\Bank\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_BankLayout.cshtml" />
+    <Content Include="Views\Bank\Index.cshtml" />
+    <Content Include="Views\Bank\AddCard.cshtml" />
+    <Content Include="Views\Bank\EditCard.cshtml" />
+    <Content Include="Views\ARSAdmin\RouteAddTemplate.cshtml" />
+    <Content Include="Views\ARSAdmin\FlightAddTemplate.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\ARS\ReSchedule.cshtml" />
+    <Content Include="Views\ARS\PaymentReSchedule.cshtml" />
+    <Content Include="Views\ARS\UserOrder.cshtml" />
+    <Content Include="Views\ARS\PaymentDetail.cshtml" />
+    <Content Include="Views\ARSAdmin\Country.cshtml" />
+    <Content Include="Views\ARSAdmin\CountryAdd.cshtml" />
+    <Content Include="Views\ARSAdmin\CountryEdit.cshtml" />
+    <Content Include="Views\ARSAdmin\CountryDelete.cshtml" />
+    <Content Include="Views\Aircraft\Create.cshtml" />
+    <Content Include="Views\Aircraft\Delete.cshtml" />
+    <Content Include="Views\Aircraft\Details.cshtml" />
+    <Content Include="Views\Aircraft\Edit.cshtml" />
+    <Content Include="Views\Aircraft\Index.cshtml" />
+    <Content Include="Views\ARSAdmin\Aircraft.cshtml" />
+    <Content Include="Views\ARSAdmin\AircraftAdd.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64946</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:64946/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,69 @@
+INSERT [dbo].[Aircraft] ([AircraftID], [AircraftName], [FirstClassSeats], [BussinessSeats], [EconomySeats], [Range], [ServiceFee]) VALUES (N'1', N'1', 90, 90, 90, 1, 1)
+INSERT [dbo].[Aircraft] ([AircraftID], [AircraftName], [FirstClassSeats], [BussinessSeats], [EconomySeats], [Range], [ServiceFee]) VALUES (N'BRR', N'Boring747', 20, 30, 60, 1000, 30000)
+INSERT [dbo].[Aircraft] ([AircraftID], [AircraftName], [FirstClassSeats], [BussinessSeats], [EconomySeats], [Range], [ServiceFee]) VALUES (N'KCC', N'Boring747', 20, 30, 70, 11111, 11111)
+GO
+INSERT [dbo].[Airline] ([AirlineID], [AirlineCountry], [AirlineName], [AirlineIcon]) VALUES (N'1', N'VN', N'NB', N'AXM.png')
+INSERT [dbo].[Airline] ([AirlineID], [AirlineCountry], [AirlineName], [AirlineIcon]) VALUES (N'2', N'JP', N'Japan Airline', N'CEB.png')
+GO
+INSERT [dbo].[Airport] ([AirportID], [AirportName], [CityName], [CountryID], [GMT]) VALUES (N'JP', N'Japan', N'Tokyo', N'JP', 9)
+INSERT [dbo].[Airport] ([AirportID], [AirportName], [CityName], [CountryID], [GMT]) VALUES (N'NB', N'Noi Bai', N'Ha Noi', N'VN', 7)
+GO
+INSERT [dbo].[Country] ([CountryID], [CountryName], [CountryFlag]) VALUES (N'CH1', N'China1', N'/img/pro pict205054056.jpg')
+INSERT [dbo].[Country] ([CountryID], [CountryName], [CountryFlag]) VALUES (N'HK', N'HongKong', N'/img/IMG_20180724_162416_HDR200044160.jpg')
+INSERT [dbo].[Country] ([CountryID], [CountryName], [CountryFlag]) VALUES (N'JP', N'Japan', N'1')
+INSERT [dbo].[Country] ([CountryID], [CountryName], [CountryFlag]) VALUES (N'MY', N'Malaysia', N'/img/download205555652.png')
+INSERT [dbo].[Country] ([CountryID], [CountryName], [CountryFlag]) VALUES (N'VN', N'Viet Nam', N'1')
+GO
+INSERT [dbo].[CreditCard] ([CCNo], [CVV], [OwnerName], [Balance]) VALUES (N'111', N'1', N'vu', 43329.7706913213)
+GO
+INSERT [dbo].[Employee] ([EmpID], [Password], [Firstname], [Lastname], [Address], [Phone], [Email], [Sex], [DoB], [IsActive], [Role]) VALUES (N'Admin', N'123', N'vu', N'vu', N'VietNam', N'00333', N'vu@gmailcom', 1, CAST(N'1994-01-17T00:00:00.000' AS DateTime), 1, 0)
+INSERT [dbo].[Employee] ([EmpID], [Password], [Firstname], [Lastname], [Address], [Phone], [Email], [Sex], [DoB], [IsActive], [Role]) VALUES (N'vu', N'vu', N'vu', N'vu', N'vu', N'09', N'vu', 1, CAST(N'1994-01-17T00:00:00.000' AS DateTime), 1, 0)
+GO
+INSERT [dbo].[Flight] ([FNo], [RNo], [AvailSeatsF], [AvailSeatsB], [AvailSeatsE], [DepartureTime], [ArrivalTime], [FlightTime], [BasePrice]) VALUES (N'111', 6, 90, 90, 88, CAST(N'2020-12-17T12:00:00.000' AS DateTime), CAST(N'2020-12-20T12:00:00.000' AS DateTime), 14, 20000)
+INSERT [dbo].[Flight] ([FNo], [RNo], [AvailSeatsF], [AvailSeatsB], [AvailSeatsE], [DepartureTime], [ArrivalTime], [FlightTime], [BasePrice]) VALUES (N'12', 7, 20, 30, 48, CAST(N'2020-12-20T00:00:00.000' AS DateTime), CAST(N'2020-12-21T00:00:00.000' AS DateTime), 16, 2000)
+INSERT [dbo].[Flight] ([FNo], [RNo], [AvailSeatsF], [AvailSeatsB], [AvailSeatsE], [DepartureTime], [ArrivalTime], [FlightTime], [BasePrice]) VALUES (N'2', 6, 90, 90, 90, CAST(N'2020-12-01T20:40:00.000' AS DateTime), CAST(N'2020-12-07T20:41:00.000' AS DateTime), 0, 20)
+GO
+SET IDENTITY_INSERT [dbo].[FlightDistance] ON 
+
+INSERT [dbo].[FlightDistance] ([ID], [AirportID1], [AirportID2], [Distance]) VALUES (1, N'JP', N'NB', 1000)
+INSERT [dbo].[FlightDistance] ([ID], [AirportID1], [AirportID2], [Distance]) VALUES (2, N'NB', N'JP', 1000)
+SET IDENTITY_INSERT [dbo].[FlightDistance] OFF
+GO
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (202012514016, N'vu', CAST(N'2020-12-05T14:00:16.403' AS DateTime), 20834.409562162964, 2)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (202012518454, N'vu', CAST(N'2020-12-05T18:04:54.723' AS DateTime), 22903.364502168981, 1)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (2020111221344, N'vu', CAST(N'2020-11-12T21:34:04.807' AS DateTime), 20001, 2)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (2020111221345, N'vu', CAST(N'2020-11-12T21:34:05.723' AS DateTime), 20001, 1)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (2020111221346, N'vu', CAST(N'2020-11-12T21:34:06.933' AS DateTime), 20001, 1)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (2020111221348, N'vu', CAST(N'2020-11-12T21:34:08.123' AS DateTime), 20001, 1)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (2020111221349, N'vu', CAST(N'2020-11-12T21:34:09.573' AS DateTime), 20001, 0)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (2020111221372, N'vu', CAST(N'2020-11-12T21:37:02.177' AS DateTime), 20001, 1)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (2020125174714, N'vu', CAST(N'2020-12-05T17:47:14.300' AS DateTime), 22898.455244346758, 1)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (20201112213325, N'vu', CAST(N'2020-11-12T21:33:25.543' AS DateTime), 20001, 1)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (20201112213423, N'vu', CAST(N'2020-11-12T21:34:23.383' AS DateTime), 20001, 1)
+INSERT [dbo].[Order] ([OrderID], [UserID], [OrderDate], [Total], [Status]) VALUES (20201112214352, N'vu', CAST(N'2020-11-12T21:43:52.050' AS DateTime), 20001, 1)
+GO
+SET IDENTITY_INSERT [dbo].[Route] ON 
+
+INSERT [dbo].[Route] ([RNo], [RAirline], [RAircraft], [Departure], [Destination]) VALUES (6, N'1', N'1', N'NB', N'JP')
+INSERT [dbo].[Route] ([RNo], [RAirline], [RAircraft], [Departure], [Destination]) VALUES (7, N'1', N'1', N'JP', N'NB')
+SET IDENTITY_INSERT [dbo].[Route] OFF
+GO
+INSERT [dbo].[Service] ([ServiceID], [ServiceName], [ServiceDetails], [ServiceFee], [IsServing]) VALUES (N'S00', N'Lunch', N'Offer lunch to customer', 1000, 1)
+GO
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (2020125140161, 202012514016, N'111', N'11111111', N'E', N'Vu', N'Tran', 1, 20, 0, 20834.409562162964)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (2020125184541, 202012518454, N'111', N'11111111', N'E', N'Vu', N'Tran', 1, 26, 0, 20902.364502168981)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (2020125184542, 202012518454, N'12', N'11111111', N'E', N'Vu', N'Tran', 1, 26, 1, 2001)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (20201112213441, 2020111221344, N'111', N'11111111', N'E', N'Vu', N'Tran', 1, 19, 0, 20001)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (20201112213451, 2020111221345, N'111', N'11111111', N'E', N'Vu', N'Tran', 1, 19, 0, 20001)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (20201112213461, 2020111221346, N'111', N'11111111', N'E', N'Vu', N'Tran', 1, 19, 0, 20001)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (20201112213481, 2020111221348, N'111', N'11111111', N'E', N'Vu', N'Tran', 1, 19, 0, 20001)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (20201112213491, 2020111221349, N'111', N'11111111', N'E', N'Vu', N'Tran', 1, 19, 0, 20001)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (20201112213721, 2020111221372, N'111', N'111111', N'E', N'Vu', N'vu', 1, 20, 0, 20001)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (20201251747141, 2020125174714, N'111', N'11111111', N'E', N'Vu', N'Tran', 0, 44, 0, 20897.455244346758)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (20201251747142, 2020125174714, N'12', N'11111111', N'E', N'Vu', N'Tran', 0, 44, 1, 2001)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (202011122133251, 20201112213325, N'111', N'11111111', N'E', N'Vu', N'Tran', 1, 19, 0, 20001)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (202011122134231, 20201112213423, N'111', N'11111111', N'E', N'Vu', N'Tran', 1, 19, 0, 20001)
+INSERT [dbo].[Ticket] ([TicketID], [OrderID], [FNo], [PassportNo], [Class], [Firstname], [Lastname], [Sex], [Age], [IsReturn], [Price]) VALUES (202011122143521, 20201112214352, N'111', N'11111111', N'E', N'Vu', N'Tran', 1, 22, 0, 20001)
+GO
+INSERT [dbo].[User] ([UserID], [Password], [FirstName], [LastName], [Address], [Phone], [Email], [Sex], [Age], [CCNo], [PassportNo_], [Skymiles]) VALUES (N'vu', N'vu', N'vu', N'vu', N'vu', N'01', N'vu', 1, 20, N'111', N'1111', 3111)
+GO

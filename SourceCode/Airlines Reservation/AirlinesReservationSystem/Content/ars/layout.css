@@ -1,0 +1,90 @@
+.bg-ars {
+    background-color: #2143a3 !important;
+}
+
+.bg-ars-light {
+    background-color: #585485 !important;
+}
+
+footer {
+    margin-top: 1em;
+    --box-shadow-color: #585485;
+    box-shadow: 0 50vh 0 50vh var(--box-shadow-color);
+}
+
+.img-fluid {
+    max-height: 35px;
+}
+
+.nav-link {
+    color: black;
+}
+
+    .nav-link:hover {
+        background-color: #c66a00;
+    }
+
+.dropdown-item:hover {
+    background-color: #ff9933;
+}
+
+
+.btn-ars-dark {
+    background-color: #ff9933 !important;
+}
+
+    .btn-ars-dark:hover {
+        color: white;
+        background-color: #c66a00 !important;
+    }
+
+.btn-ars-light {
+    background-color: #ffca64 !important;
+}
+
+    .btn-ars-light:hover {
+        background-color: #ff9933 !important;
+    }
+
+.table-ars,
+.table-ars > th,
+.table-ars > td {
+    background-color: #ffca64;
+}
+
+    .table-ars th,
+    .table-ars td,
+    .table-ars thead th,
+    .table-ars tbody + tbody {
+        border-color: #ff9933;
+    }
+
+.table-hover .table-ars:hover {
+    background-color: #fcb269;
+}
+
+    .table-hover .table-ars:hover > td,
+    .table-hover .table-ars:hover > th {
+        background-color: #fcb269;
+    }
+
+#scrollBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: dimgray; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 8px; /* Some padding */
+    border-radius: 3px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+}
+
+    #scrollBtn:hover {
+        background-color: black; /* Add a dark-grey background on hover */
+    }
+

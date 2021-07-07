@@ -1,0 +1,37 @@
+.list-group-item-ars {
+    background-color: #649fff;
+    color: #000;
+}
+
+    .list-group-item-ars.active {
+        color: #fff;
+        background-color: #102152;
+        font-weight: bold;
+    }
+
+.table-ars,
+.table-ars > th,
+.table-ars > td {
+    background-color: #649fff;
+}
+
+    .table-ars th,
+    .table-ars td,
+    .table-ars thead th,
+    .table-ars tbody + tbody {
+        border-color: #ff9933;
+    }
+
+.table-hover .table-ars:hover {
+    background-color: #fcb269;
+}
+
+    .table-hover .table-ars:hover > td,
+    .table-hover .table-ars:hover > th {
+        background-color: #fcb269;
+    }
+
+.bg-ars {
+    background-color: #585485;
+}
+

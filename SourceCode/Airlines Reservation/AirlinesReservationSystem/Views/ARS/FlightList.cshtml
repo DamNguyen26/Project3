@@ -1,0 +1,330 @@
+@model IEnumerable<AirlinesReservationSystem.Models.ars.FlightResult>
+
+@{
+    ViewBag.Title = "FlightList";
+    bool roundTrip = bool.Parse(ViewBag.RoundTrip.ToString());
+    AirlinesReservationSystem.Models.ars.FlightResult firstTrip = null;
+    if (ViewBag.firstTrip != null) { firstTrip = (AirlinesReservationSystem.Models.ars.FlightResult)ViewBag.firstTrip; }
+    else { firstTrip = null; }
+    var searchParams = (AirlinesReservationSystem.Models.ars.FlightSearch)Session["searchParams"];
+    int totalPassenger = int.Parse(Session["totalPassenger"].ToString());
+    string departure = searchParams.Departure;
+    string destination = searchParams.Destination;
+    var classToSearch = searchParams.Class;
+    int totalPages = ViewBag.Pages;
+}
+<link href="~/Content/ars/FlightList.css" rel="stylesheet" />
+
+@if (firstTrip == null)
+{<h2>Showing flights: @departure - @destination</h2>}
+else
+{
+<!--Start of Selected Flight-->
+<h3>First Trip:</h3>
+<div class="row border rounded shadow-sm mb-md-2 pb-md-2 pt-1 flightList-card flightList-card-selected">
+    <div class="col-md-3">
+        <p>@string.Format("{0:hh:mm tt}", firstTrip.FlightVM.DepartureTime) - @string.Format("{0:hh:mm tt}", firstTrip.FlightVM.ArrivalTime)</p>
+        <p>
+            <img src="~/img/ars/@firstTrip.FlightVM.Route.Airline.AirlineIcon" alt="@firstTrip.FlightVM.Route.Airline.AirlineName" class="airline-icon" /> <br />
+            @firstTrip.FlightVM.Route.Airline.AirlineName
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            @{var firstFlightTime = TimeSpan.FromHours(firstTrip.FlightVM.FlightTime);}
+            @firstFlightTime.ToString("hh")h  @firstFlightTime.ToString("mm")m
+        </p>
+        <p>
+            @firstTrip.RouteVM.Departure - @firstTrip.RouteVM.Destination
+        </p>
+    </div>
+    <div class="col-md-3 row">
+        <div class="col-md-4 text-md-right">
+            <h3>$@firstTrip.FlightVM.BasePrice</h3>
+        </div>
+        <div class="col-md-8 text-md-left">
+            @Html.ActionLink("Select Another", "FlightList", new { @isReselect = true }, new { @class = "btn btn-ars-dark btn-ars-list" })
+        </div>
+    </div>
+    <!--Start of Flight Details-->
+    <a data-toggle="collapse" href="#div_details_@firstTrip.FlightVM.FNo" class="row col-md-12 pl-md-4">Flight Details</a>
+    <div id="div_details_@firstTrip.FlightVM.FNo" class="collapse hide row col-md-12">
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action">
+                    <b>Flight Name:</b>
+                    @firstTrip.FlightVM.FNo
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <b>Plane:</b>
+                    @firstTrip.FlightVM.Route.Aircraft.AircraftName
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <b>Departure:</b>
+                    @firstTrip.FlightVM.Route.DepartureAirport.AirportName
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <b>Arrival:</b>
+                    @firstTrip.FlightVM.Route.DestinationAirport.AirportName
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <b>Takeoff:</b>
+                    @firstTrip.FlightVM.DepartureTime
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <b>Landing:</b>
+                    @firstTrip.FlightVM.ArrivalTime
+                </li>
+                @{
+                    int fcSeatsFT = 0, bSeatsFT = 0, eSeatsFT = 0;
+                    if (firstTrip.FlightVM.AvailSeatsF != null) { fcSeatsFT = int.Parse(firstTrip.FlightVM.AvailSeatsF.ToString()); }
+                    if (firstTrip.FlightVM.AvailSeatsB != null) { bSeatsFT = int.Parse(firstTrip.FlightVM.AvailSeatsB.ToString()); }
+                    eSeatsFT = firstTrip.FlightVM.AvailSeatsE;
+                }
+                <li class="list-group-item list-group-item-action">
+                    <b>Available Seats:</b>
+                    <table class="table table-sm">
+                        <tr class="text-md-center">
+                            <th>First Class</th>
+                            <th>Business</th>
+                            <th>Economy</th>
+                        </tr>
+                        <tr class="text-md-center">
+                            <td>@fcSeatsFT</td>
+                            <td>@bSeatsFT</td>
+                            <td>@eSeatsFT</td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--End of Flight Details-->
+</div>
+<!--End of Selected Flight-->
+
+<h2 class="my-md-2 py-md-2">Showing flights: @destination - @departure</h2>
+}
+
+<!--refine search form-->
+@*error msg if any*@
+<div class="row">
+    <span class="text-danger">@TempData["NoSeatsMessage"]</span>
+</div>
+<!--result list-->
+@{
+    var count = Model.Count();
+}
+@foreach (var item in Model)
+{
+    if (classToSearch == "E") { if (item.FlightVM.AvailSeatsE < totalPassenger) { continue; } }
+    else if (classToSearch == "B") { if (item.FlightVM.AvailSeatsB < totalPassenger || item.FlightVM.AvailSeatsB == null) { continue; } }
+    else if (classToSearch == "F") { if (item.FlightVM.AvailSeatsF < totalPassenger || item.FlightVM.AvailSeatsF == null) { continue; } }
+    <div class="row border rounded shadow-sm mb-md-2 pb-md-2 pt-1 flightList-card">
+        <div class="row col-md-12">
+            <div class="col-md-3">
+                <p>@string.Format("{0:hh:mm tt}", item.FlightVM.DepartureTime) - @string.Format("{0:hh:mm tt}", item.FlightVM.ArrivalTime)</p>
+                <p>
+                    <img src="~/img/ars/@item.FlightVM.Route.Airline.AirlineIcon" alt="@item.FlightVM.Route.Airline.AirlineName" class="airline-icon" /> <br />
+                    @item.FlightVM.Route.Airline.AirlineName
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p>
+                    @{var flightTime = TimeSpan.FromHours(item.FlightVM.FlightTime);}
+                    @flightTime.ToString("hh")h  @flightTime.ToString("mm")m
+                </p>
+                <p>
+                    @item.RouteVM.Departure - @item.RouteVM.Destination
+                </p>
+            </div>
+            <div class="col-md-3 row ml-md-2">
+                <div class="col-md-4 text-md-right">
+                    <h3>$@item.FlightVM.BasePrice</h3>
+                </div>
+                <div class="col-md-8 text-md-right">
+                    @if (roundTrip && Session["fid1"] == null)
+                    {
+                        @Html.ActionLink("Select", "FlightListReturn", new { fid = item.FlightVM.FNo, rid = item.RouteVM.RNo }, new { @class = "btn btn-ars-light mb-md-1 btn-ars-list" })
+                    }
+                    else if (roundTrip && Session["fid1"] != null)
+                    {
+                        if (Session["reschedule"] != null)
+                        {
+                            @Html.ActionLink("Select", "PaymentReSchedule", new { FNo = firstTrip.FlightVM.FNo, ReFNo = item.FlightVM.FNo, PeopleNum = totalPassenger }, new { @class = "btn btn-ars-light btn-ars-list", @id = "hey it's me" })
+                        }
+                        else
+                        {
+                            <input type="button" value="Select" data-toggle="modal" data-target="#modal" class="btn btn-ars-dark btn-ars-list" onclick="getPaymentDetail('@firstTrip.FlightVM.FNo', '@item.FlightVM.FNo')" />
+                            @*@Html.ActionLink("Select", "Payment", new { FNo = firstTrip.FlightVM.FNo, ReFNo = item.FlightVM.FNo, PeopleNum = totalPassenger }, new { @class = "btn btn-ars-light btn-ars-list", @id = "hey it's me" })*@
+                        }
+                    }
+                    else
+                    {
+                        if (Session["reschedule"] != null)
+                        {
+                            @Html.ActionLink("Select", "PaymentReSchedule", new { FNo = item.FlightVM.FNo }, new { @class = "btn btn-ars-dark btn-ars-list" })
+                        }
+                        else
+                        {
+                            <input type="button" value="Select" data-toggle="modal" data-target="#modal" class="btn btn-ars-dark btn-ars-list" onclick="getPaymentDetail('@item.FlightVM.FNo')" />
+                            @*@Html.ActionLink("Select", "Payment", new { FNo = item.FlightVM.FNo }, new { @class = "btn btn-ars-dark btn-ars-list" })*@
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+        <!--Start of Flight Details-->
+        <a data-toggle="collapse" href="#div_details_@item.FlightVM.FNo" class="row col-md-12 pl-md-4">Flight Details</a>
+        <div id="div_details_@item.FlightVM.FNo" class="collapse hide row col-md-12">
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-action">
+                        <b>Flight Name:</b>
+                        @item.FlightVM.FNo
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <b>Plane:</b>
+                        @item.FlightVM.Route.Aircraft.AircraftName
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <b>Departure:</b>
+                        @item.FlightVM.Route.DepartureAirport.AirportName
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <b>Arrival:</b>
+                        @item.FlightVM.Route.DestinationAirport.AirportName
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <b>Takeoff:</b>
+                        @item.FlightVM.DepartureTime
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <b>Landing:</b>
+                        @item.FlightVM.ArrivalTime
+                    </li>
+                    @{
+                        int fcSeats = 0, bSeats = 0, eSeats = 0;
+                        if (item.FlightVM.AvailSeatsF != null) { fcSeats = int.Parse(item.FlightVM.AvailSeatsF.ToString()); }
+                        if (item.FlightVM.AvailSeatsB != null) { bSeats = int.Parse(item.FlightVM.AvailSeatsB.ToString()); }
+                        eSeats = item.FlightVM.AvailSeatsE;
+                    }
+                    <li class="list-group-item list-group-item-action">
+                        <b>Available Seats:</b>
+                        <table class="table table-sm">
+                            <tr class="text-md-center">
+                                <th>First Class</th>
+                                <th>Business</th>
+                                <th>Economy</th>
+                            </tr>
+                            <tr class="text-md-center">
+                                <td>@fcSeats</td>
+                                <td>@bSeats</td>
+                                <td>@eSeats</td>
+                            </tr>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--End of Flight Details-->
+    </div>
+}
+
+<div class="row">
+    <ul class="pagination mx-auto">
+        @{
+            for (int i = 1; i <= totalPages; i++)
+            {
+                if (i == ViewBag.PageIndex)
+                {
+                    <li class="active page-item">
+                        @if (roundTrip && Session["fid1"] != null)
+                        {
+                            @Html.ActionLink(i.ToString(), "FlightListReturn", new { page = i, fid = firstTrip.FlightVM.FNo, rid = firstTrip.FlightVM.RNo }, new { @class = "page-link" })
+                        }
+                        else
+                        {@Html.ActionLink(i.ToString(), "FlightList", new { page = i }, new { @class = "page-link" })}
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        @if (roundTrip && Session["fid1"] != null)
+                        {
+                            @Html.ActionLink(i.ToString(), "FlightListReturn", new { page = i, fid = firstTrip.FlightVM.FNo, rid = firstTrip.FlightVM.RNo }, new { @class = "page-link" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink(i.ToString(), "FlightList", new { page = i }, new { @class = "page-link" })
+                        }
+                    </li>
+                }
+            }
+        }
+    </ul>
+</div>
+
+@if (Model.Count() == 0 || ViewBag.PageIndex == totalPages)
+{
+    if (roundTrip == false)
+    {
+        <div class="row">
+            <p class="mx-auto text-md-center">
+                End Of List <br />
+                @Html.ActionLink("Click", "FlightListWithStops", null, new { @class = "btn btn-ars-light" })
+                to find flights to @destination with additional stops <br />
+                <span class="text-danger">(Note that prices will be higher as you're taking multiple flights)</span>
+        </div>
+    }
+    else
+    {
+        <p class="text-md-center col-md-12">
+            End Of List
+        </p>
+    }
+}
+
+
+<div class="modal fade" id="modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header bg-ars">
+                <h4 class="modal-title" id="modalTitle">Flight Detail</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" id="modalBody">
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <b>Total:</b> <span id="TotalDetail"></span>
+                <a href="" class="btn btn-success" id="btnConfirm">Confirm</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function getPaymentDetail(FNo, ReFNo) {
+        if (ReFNo == null) {
+            ReFNo = "";
+        }
+        $('#modalBody').html("");
+        $.post("/ars/paymentdetail?FNo=" + FNo + "&ReFNo=" + ReFNo, function (result) {
+            $('#modalBody').html(result);
+            var total = $("#Total").val();
+            $("#TotalDetail").html(total);
+            $("#btnConfirm").attr("href", "/ars/payment?FNo=" + FNo + "&ReFNo=" + ReFNo);
+        });
+    }
+
+</script>

@@ -1,0 +1,334 @@
+@model AirlinesReservationSystem.Models.Order
+
+@{
+    ViewBag.Title = "PaymentResult";
+    IEnumerable<AirlinesReservationSystem.Models.Ticket> TicketList = AirlinesReservationSystem.Models.ars.PaymentDAO.GetTicketList(Model.OrderID);
+    int ticketCount = 1;
+}
+<div class="">
+    <h2>
+        Order: @Model.OrderID @Html.ActionLink("Back to Homepage", "Index", null, new { @class = "btn btn-ars-light" })
+    </h2>
+</div>
+@if (Session["user"] != null && Session["user"].ToString() == Model.UserID)
+{
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <h4>Basic info</h4>
+            </div>
+            <div class="card-body">
+                <div class="">
+                    <b>Status:</b>
+                    @if (Model.Status == 0)
+                    {
+                        var DepartureTime = AirlinesReservationSystem.Models.arsadmin.TicketDAO.GetTicket(TicketList.Where(t => t.IsReturn == false).FirstOrDefault().TicketID).Flight.DepartureTime;
+                        if (System.DateTime.Now < DepartureTime.AddDays(-14))
+                        {
+                            <span class="text-warning">Blocking (Need to be paid before 2 weeks before the flight)</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">Blocked but Canceled (Need to be paid before 2 weeks before the flight)</span>
+                        }
+
+                    }
+                    else if (Model.Status == 1)
+                    {
+                        <span class="text-success">Booked</span>
+                    }
+                    else if (Model.Status == 2)
+                    {
+                        <span class="text-danger">Canceled</span>
+                    }
+                </div>
+                <div>
+                    <b>Total:</b> @Model.Total$
+                </div>
+                <div>
+                    @if (Model.Status == 1)
+                    {
+                        <b>Booked Date:</b>
+                    }
+                    else if (Model.Status == 0)
+                    {
+                        <b>Blocked Date:</b>
+                    }
+                    @Model.OrderDate
+                </div>
+                <div>
+                    <b>Booking User:</b> @Model.UserID
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    @if (TicketList.Where(t => t.IsReturn == true).Count() > 0)
+                    {
+                        @:First Flight
+                    }
+                    else
+                    {
+                        @:Flights
+                    }
+                </h4>
+            </div>
+            <div class="card-body">
+                @foreach (var ticket in TicketList.Where(t => t.IsReturn == false))
+                {
+                    var t = AirlinesReservationSystem.Models.arsadmin.TicketDAO.GetTicket(ticket.TicketID);
+                    <hr />
+                    <div>
+                        <p>
+                            @(ticketCount++).
+                            @t.Flight.Route.Airline.AirlineName <b>#@t.TicketID</b>| Passenger: @t.Firstname.ToUpper() / @t.Lastname.ToUpper() |
+                            @if (t.Class == "F")
+                            {
+                                @:First Class
+                            }
+                            else if (t.Class == "B")
+                            {
+                                @:Bussiness Class
+                            }
+                            else
+                            {
+                                @:Economy Class
+                            }
+
+                        </p>
+                        <div class="row">
+                            <h4 class="col-md-5 text-center">
+                                @t.Flight.Route.DepartureAirport.CityName (@t.Flight.Route.DepartureAirport.AirportID)
+                            </h4>
+                            <h4 class="col-md-2 text-center">
+                                &rArr;
+                            </h4>
+                            <h4 class="col-md-5 text-center">
+                                @t.Flight.Route.DestinationAirport.CityName (@t.Flight.Route.DestinationAirport.AirportID)
+                            </h4>
+                            <p class="col-md-5 text-muted text-center">
+                                @t.Flight.DepartureTime
+                            </p>
+                            <p class="col-md-2 text-muted text-center">
+                                Duration: @System.TimeSpan.FromHours(t.Flight.FlightTime).ToString(@"hh") h
+                                @System.TimeSpan.FromHours(t.Flight.FlightTime).ToString(@"mm") m
+                            </p>
+                            <p class="col-md-5 text-muted text-center">
+                                @t.Flight.ArrivalTime
+                            </p>
+                        </div>
+                    </div>
+                    <hr />
+                }
+            </div>
+        </div>
+        <br />
+        @if (TicketList.Where(t => t.IsReturn).Count() > 0)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h4>Return Flight</h4>
+                </div>
+                <div class="card-body">
+                    @foreach (var ticket in TicketList.Where(t => t.IsReturn == true))
+                    {
+                        var t = AirlinesReservationSystem.Models.arsadmin.TicketDAO.GetTicket(ticket.TicketID);
+                        <hr />
+                        <div>
+                            <p>
+                                @(ticketCount++). @t.Flight.Route.Airline.AirlineName<b>#@t.TicketID</b> | Passenger: @t.Firstname.ToUpper() / @t.Lastname.ToUpper() |
+                                @if (t.Class == "F")
+                                {
+                                    @:First Class
+                                }
+                                else if (t.Class == "B")
+                                {
+                                    @:Bussiness Class
+                                }
+                                else
+                                {
+                                    @:Economy Class
+                                }
+
+                            </p>
+                            <div class="row">
+                                <h4 class="col-md-5 text-center">
+                                    @t.Flight.Route.DepartureAirport.CityName (@t.Flight.Route.DepartureAirport.AirportID)
+                                </h4>
+                                <h4 class="col-md-2 text-center">
+                                    &rArr;
+                                </h4>
+                                <h4 class="col-md-5 text-center">
+                                    @t.Flight.Route.DestinationAirport.CityName (@t.Flight.Route.DestinationAirport.AirportID)
+                                </h4>
+                                <p class="col-md-5 text-muted text-center">
+                                    @t.Flight.DepartureTime
+                                </p>
+                                <p class="col-md-2 text-muted text-center">
+                                    Duration: @System.TimeSpan.FromHours(t.Flight.FlightTime).ToString(@"hh") h
+                                    @if (int.Parse(System.TimeSpan.FromHours(t.Flight.FlightTime).ToString(@"mm")) > 0)
+                                    {
+                                        System.TimeSpan.FromHours(t.Flight.FlightTime).ToString(@"mm");@:m
+                                    }
+                                </p>
+                                <p class="col-md-5 text-muted text-center">
+                                    @t.Flight.ArrivalTime
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                </div>
+
+            </div>
+        }
+        <br />
+        <div class="text-center">
+            @if (Model.Status == 0)
+            {
+                if (Session["user"] == null)
+                {
+                    <a href="/ars/login" value="" class="btn btn-lg btn-warning">Login to pay or cancel this order</a>
+                }
+                else
+                {
+                    if (Session["user"].ToString() == Model.UserID)
+                    {
+                        var DepartureTime = AirlinesReservationSystem.Models.arsadmin.TicketDAO.GetTicket(TicketList.Where(t => t.IsReturn == false).FirstOrDefault().TicketID).Flight.DepartureTime;
+                        if (System.DateTime.Now < DepartureTime.AddDays(-14))
+                        {
+                            <input type="button" class="btn btn-lg btn-success" value="Pay this order" data-toggle="modal" data-target="#modal" onclick="confirmPayBlocking(@Model.OrderID)" />
+                            <input type="button" class="btn btn-lg btn-danger" value="Cancel this order" data-toggle="modal" data-target="#modal" onclick="confirmCancelOrder(@Model.OrderID)" />
+                        }
+
+                    }
+
+                }
+            }
+            else if (Model.Status == 1)
+            {
+                if (Session["user"] == null)
+                {
+                    <a href="/ars/login" value="" class="btn btn-lg btn-warning">Login to cancel this order</a>
+                }
+                else
+                {
+                    if (Session["user"].ToString() == Model.UserID)
+                    {
+                        var flight = AirlinesReservationSystem.Models.arsadmin.FlightDAO.GetFlight(TicketList.Where(t => t.IsReturn == false).FirstOrDefault().FNo);
+                        if (DateTime.Now <= flight.DepartureTime.AddHours(2))
+                        {
+                            <input type="button" class="btn btn-lg btn-danger" value="Cancel this order" data-toggle="modal" data-target="#modal" onclick="confirmCancelOrder(@Model.OrderID)" />
+                            <a href="/ars/reschedule?id=@Model.OrderID" class="btn btn-lg btn-ars-light">Re-schedule</a>
+                        }
+
+                    }
+                }
+            }
+
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-ars">
+                    <h4 class="modal-title" id="modalTitle">Cancel confirm</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body" id="modalBody">
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btnConfirm">Confirm</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h4 class="">You cannot view this order.</h4>
+}
+
+<script>
+
+    function confirmPayBlocking(id) {
+        var s = "";
+        s += "<div class='form-group form-inline'>";
+        s += "<div class='col-md-6 text-right'>Credit Card number:</div>";
+        s += "<div class='col-md-6'><input type='text' name='CCNo' id='CCNo' value='@AirlinesReservationSystem.Models.ars.UsersDAO.GetUser(Model.UserID).CCNo' class='form-control' /></div>";
+        s += "<div class='col-md-6 text-right'>CVV:</div>";
+        s += "<div class='col-md-6'><input type='text' name='CVV' id='CVV' class='form-control' maxlength=3 /></div>";
+        s += "<div class='col-md-12 text-center text-danger' id='paymentM'></div>";
+        s += "</div>";
+        $("#modalBody").html(s);
+        $("#modalTitle").html("Payment confirm");
+        $("#btnConfirm").off("click");
+        $("#btnConfirm").on("click", function () { payBlocking(id); });
+    }
+
+    function payBlocking(id) {
+        var CCNo = $("#CCNo").val();
+        var CVV = $("#CVV").val();
+        $.post("/ars/blockingpayment?id=" + id + "&CCNo=" + CCNo + "&CVV=" + CVV, function (result) {
+            if (result == "ok") {
+                window.location.reload();
+            } else {
+                $('#paymentM').html(result);
+            }
+        });
+    }
+
+    function confirmCancelOrder(id) {
+        var s = "";
+        s += "<h3 class='text-danger'>";
+        @if (Model.Status==1)
+        {
+            var flight = AirlinesReservationSystem.Models.arsadmin.FlightDAO.GetFlight(TicketList.Where(t => t.IsReturn == false).FirstOrDefault().FNo);
+            var daysToDeparture = (flight.DepartureTime - DateTime.Now).TotalDays;
+            if (daysToDeparture >= 14)
+            {
+                @: s += "Cancel this order, we will refund @( Convert.ToInt32(Model.Total - Model.Total * 0.02)) to your account.";
+            }
+            else
+            {
+                @: s+= "Cancel this order, we will refund @(Convert.ToInt32(Model.Total - Model.Total * 0.02 * (14 - daysToDeparture))) to your account.";
+            }
+        }
+        s+="</h3>"
+        //s+="Are you sure to cancel order: \"#" + id + "\"?</h3>";
+        s += "<div class='container row form-inline text-center'>";
+        s += "<div class='col-md-4 text-right'>Credit Card Number</div><input name='CCNo' id='CCNo' class='form-control col-md-4' value='@AirlinesReservationSystem.Models.ars.UsersDAO.GetUser(Model.UserID).CCNo'/>";
+        s += "<div class='col-md-4'></div>";
+        s += "<div class='col-md-4'></div>";
+        s += "<div class='col-md-4 text-danger' id='errorM'></div>";
+        s += "</div>";
+        $("#modalBody").html(s);
+        $("#modalTitle").html("Cancel confirm");
+        $("#btnConfirm").off("click");
+        $("#btnConfirm").on("click", function () { cancelOrder(id); });
+    }
+
+    function cancelOrder(id) {
+        var CCNo = $("#CCNo").val();
+        $.post("/ars/CancelPayment?id=" + id + "&CCNo=" + CCNo , function (result) {
+            if (result == "ok") {
+                window.location.reload();
+            } else {
+                $('#errorM').html(result);
+            }
+        });
+    }
+</script>

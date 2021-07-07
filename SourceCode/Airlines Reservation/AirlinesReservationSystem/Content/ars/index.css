@@ -1,0 +1,44 @@
+.flightSearch {
+    color: white;
+    background-color: #616161;
+    margin: auto;
+    border-radius: 0.25em;
+    box-shadow: 0.1em 0.3em 2em 0.1em #888888;
+}
+
+.flightSearch-content {
+    padding: 1em;
+}
+
+.btn-secondary {
+    /*background-color: #616161 !important;*/
+}
+
+.active {
+    background-color: #ff9933 !important;
+    color: black !important;
+}
+
+.text-danger {
+    color: #f74f5f !important; /*lighter red color for form*/
+}
+
+.airline-icon-index {
+    max-height: 150px;
+    max-width: 150px;
+}
+
+.footer-link {
+    color: black;
+    text-decoration: none;
+}
+
+    .footer-link:hover, .footer-link:focus {
+        text-decoration: underline;
+    }
+
+
+/*#departureTime, #returnDepartureTime {
+    min-width: 200px;
+    max-width: 200px;
+}*/

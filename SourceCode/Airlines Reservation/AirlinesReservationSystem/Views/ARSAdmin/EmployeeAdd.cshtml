@@ -1,0 +1,67 @@
+@model List<AirlinesReservationSystem.Models.Employee>
+
+
+
+<h2>Employee - Add new Employee <a href="/arsadmin/employee" class="btn btn-warning" @*onclick="setModal('list')*@ ">Back to list</a></h2>
+<div class="container" id="EmployeeAdd">
+
+    @using (Html.BeginForm("employeeadd", "arsadmin",
+        FormMethod.Post,
+        new { @id = "frmEmployeeAdd", @name = "frmEmployeeAdd" }))
+    {
+        <p class="text-danger" id="errorMessage"></p>
+        <div id="EmployeeAddList" class="container">
+
+        </div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-10">
+                <button type="button" class="btn btn-lg btn-info" id="btnAddAppend">Add another</button>
+                <input type="submit" class="text-hide" />
+                <input type="button" value="Add this Employee" class="btn btn-lg btn-success" id="btnEmployeeAdd" />
+            </div>
+        </div>
+    }
+
+
+</div>
+
+<script>
+
+
+    $(document).ready(function () {
+        var i = 0;
+        appendForm();
+        i = i + 1;
+        function appendForm() {
+            $.post("/arsadmin/employeeaddtemplate?index=" + i, function (result) {
+                $("#EmployeeAddList").append(result);
+            });
+        }
+
+        $("#btnEmployeeAdd").click(function () {
+            if ($('#frmEmployeeAdd')[0].checkValidity()) {
+                var form = $("#frmEmployeeAdd").serialize();
+
+                $.post("/arsadmin/EmployeeAdd", form, function (result) {
+                    $("#errorMessage").html(result);
+                    if (result == "") {
+                        window.location.href = "/arsadmin/Employee";
+                    }
+                });
+            } else {
+                $('#frmEmployeeAdd').find(':submit').click();
+            }
+        })
+
+        $("#btnAddAppend").click(function () {
+            $("#btnEmployeeAdd").val("Add all Employees");
+            appendForm();
+            i = i + 1;
+        })
+
+    });
+    //$('#EmployeeAdd').change(function () {
+    //    $.validator.unobtrusive.parse("#frmEmployeeAdd");
+    //});
+</script>

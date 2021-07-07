@@ -1,0 +1,80 @@
+@model IEnumerable<AirlinesReservationSystem.Models.ars.FlightResult>
+
+@{
+    ViewBag.Title = "FlightList";
+    var firstTrip = (AirlinesReservationSystem.Models.ars.FlightResult)ViewBag.firstTrip;
+    var searchParams = (AirlinesReservationSystem.Models.ars.FlightSearch)Session["searchParams"];
+    int totalPassenger = int.Parse(Session["totalPassenger"].ToString());
+    var classToSearch = searchParams.Class;
+}
+<link href="~/Content/ars/FlightList.css" rel="stylesheet" />
+
+<h3>First Trip:</h3>
+<div class="row border rounded shadow-sm mb-md-2 pb-md-2 pt-1 flightList-card flightList-card-selected">
+    <div class="col-md-3">
+        <p>@string.Format("{0:hh:mm tt}", firstTrip.FlightVM.DepartureTime) - @string.Format("{0:hh:mm tt}", firstTrip.FlightVM.ArrivalTime)</p>
+        <p>
+            <img src="~/img/ars/@firstTrip.FlightVM.Route.Airline.AirlineIcon" alt="@firstTrip.FlightVM.Route.Airline.AirlineName" class="airline-icon" /> <br />
+            @firstTrip.FlightVM.Route.Airline.AirlineName
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            @{var flightTime = TimeSpan.FromHours(firstTrip.FlightVM.FlightTime);}
+            @flightTime.ToString("hh")h  @flightTime.ToString("mm")m
+        </p>
+        <p>
+            @firstTrip.RouteVM.Departure - @firstTrip.RouteVM.Destination
+        </p>
+    </div>
+    <div class="col-md-3 row">
+        <div class="col-md-4 text-md-right">
+            <h3>$@firstTrip.FlightVM.BasePrice</h3>
+        </div>
+        <div class="col-md-8 text-md-left">
+            @Html.ActionLink("Select Another", "FlightList", new { @isReselect = true }, new { @class = "btn btn-ars-dark btn-ars-list" })
+        </div>
+    </div>
+</div>
+<!--Result List for returns-->
+<h3>Returning flights:</h3>
+@foreach (var item in Model)
+{
+    if (classToSearch == "E") { if (item.FlightVM.AvailSeatsE < totalPassenger) { continue; } }
+    else if (classToSearch == "B") { if (item.FlightVM.AvailSeatsB < totalPassenger) { continue; } }
+    else if (classToSearch == "F") { if (item.FlightVM.AvailSeatsF < totalPassenger) { continue; } }
+    <div class="row border rounded shadow-sm mb-md-2 pb-md-2 pt-1 flightList-card">
+        <div class="col-md-3">
+            <p>@string.Format("{0:hh:mm tt}", firstTrip.FlightVM.DepartureTime) - @string.Format("{0:hh:mm tt}", firstTrip.FlightVM.ArrivalTime)</p>
+            <p>
+                <img src="~/img/ars/@firstTrip.FlightVM.Route.Airline.AirlineIcon" alt="@firstTrip.FlightVM.Route.Airline.AirlineName" class="airline-icon" /> <br />
+                @firstTrip.FlightVM.Route.Airline.AirlineName
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                @{var retFlightTime = TimeSpan.FromHours(item.FlightVM.FlightTime);}
+                @retFlightTime.ToString("hh")h  @retFlightTime.ToString("mm")m
+            </p>
+            <p>
+                @item.RouteVM.Departure - @item.RouteVM.Destination
+            </p>
+        </div>
+        <div class="col-md-3 row">
+            <div class="col-md-4 text-md-right">
+                <h3>$@item.FlightVM.BasePrice</h3>
+            </div>
+            <div class="col-md-8 text-md-left">
+                @if (Session["reschedule"] != null)
+                {
+                    @Html.ActionLink("Select", "PaymentReSchedule", new { FNo = firstTrip.FlightVM.FNo, ReFNo = item.FlightVM.FNo, PeopleNum = totalPassenger }, new { @class = "btn btn-ars-light btn-ars-list" })
+                }
+                else
+                {
+                    @Html.ActionLink("Select", "Payment", new { FNo = firstTrip.FlightVM.FNo, ReFNo = item.FlightVM.FNo, PeopleNum = totalPassenger }, new { @class = "btn btn-ars-light btn-ars-list" })
+                }
+
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,2 @@
+Theo thầy sẽ là code trong .NET thường 
+Nhưng thầy khuyên nên sử dụng .NET core để có thể nhúng ajax dễ hơn
